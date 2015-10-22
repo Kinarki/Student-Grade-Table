@@ -6,6 +6,8 @@
  * @type {Array}
  */
 
+var student_array = [];
+
 /**
  * inputIds - id's of the elements that are used to add students
  * @type {string[]}
@@ -14,6 +16,14 @@
 /**
  * addClicked - Event Handler when user clicks the add button
  */
+function addClick(){
+    var name = document.getElementById('studentName').value;
+    var course = document.getElementById('course').value;
+    var grade = document.getElementById('studentGrade').value;
+    student_array.push(name, course, grade);
+    console.log(student_array);
+
+}
 
 /**
  * cancelClicked - Event Handler when user clicks the cancel button, should clear out student form
