@@ -8,22 +8,21 @@
     <meta name="viewport" content="initial-scale=1, user-scalable=no">
 </head>
 <body>
-<div class="container header">
-    <div class="row">
+<div class="container">
+    <div class="page-header">
         <!-- only show this element when the isnt on mobile -->
             <h1 class="hidden-xs"><strong> Student Grade Table
-                <small class="col-xs-offset-7 col-sm-offset-6">Grade Average : <span class="avgGrade bg-gray"></span></small>
+                <small class="pull-right">Grade Average : <span class="avgGrade label label-default">0</span></small>
             </strong>
             </h1>
         <!-- only show this element when the user gets to a mobile version -->
         <h3 class="visible-xs"><strong>Student Grade Table
-            <small class="col-xs-offset-7">Grade Average : <span class="avgGrade bg-gray"></span></small>
+            <small class="pull-right">Grade Average : <span class="avgGrade label label-default">0</span></small>
             </strong>
         </h3>
-        <hr>
     </div>
 
-    <div class="student-add-form form-horizontal col-xs-12 col-sm-push-9 col-sm-3">
+    <div class="student-add-form form-horizontal col-xs-12 pull-right col-sm-3">
         <h4 class="row">Add Student</h4>
         <div class="input-group form-group row">
             <span class="input-group-addon">
@@ -51,7 +50,7 @@
         </div>
     </div>
     </form>
-    <div class="student-list-container col-sm-9 col-sm-pull-3">
+    <div class="student-list-container col-sm-9 push-left">
         <table class="student-list table">
             <thead>
             <tr>
@@ -63,7 +62,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><h3><strong>User Info Unavailable</strong></h3></td>
+                    <td colspan="2"><h3>User Info Unavailable</h3></td>
                 </tr>
             </tbody>
 
