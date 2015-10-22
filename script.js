@@ -28,7 +28,9 @@ function addClick(){
 /**
  * cancelClicked - Event Handler when user clicks the cancel button, should clear out student form
  */
+    function cancelClick() {
 
+    }
 /**
  * addStudent - creates a student objects based on input fields in the form and adds the object to global student array
  *
@@ -65,4 +67,4 @@ function addClick(){
 
 /**
  * Listen for the document to load and reset the data to the initial state
- */
+*/
