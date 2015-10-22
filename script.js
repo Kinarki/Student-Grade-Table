@@ -11,6 +11,7 @@ var student_array = [];
  * @type {string[]}
  */
 var inputIds = {[document.getElementById('studentName'), document.getElementById('course'), document.getElementById('studentGrade')]};
+// is it working?
 /**
  * addClicked - Event Handler when user clicks the add button
  */
