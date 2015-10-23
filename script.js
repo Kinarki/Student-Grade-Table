@@ -18,13 +18,6 @@ student.grade ='';
  */
 
 
-
- var name = $('#studentName');
- var course = $('#course');
- var grade = $('#studentGrade');
-
-
-
 /**
  * addClicked - Event Handler when user clicks the add button
  */
