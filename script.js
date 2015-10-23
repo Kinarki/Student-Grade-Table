@@ -5,36 +5,44 @@
  * student_array - global array to hold student objects
  * @type {Array}
  */
+
 var student_array = [];
-//student.deleteself = function(){
-//on click delete self
-//};
 
 
 /**
  * inputIds - id's of the elements that are used to add students
  * @type {string[]}
+<<<<<<< HEAD
  */
 var student_name = $('#studentName');
 var student_course = $('#course');
 var student_grade = $('#studentGrade');
 
+// */
+
+
 /**
  * addClicked - Event Handler when user clicks the add button
  */
+
 function addClick() {
     addStudent();
     updatesStudentList();
-    //calculate();
-    // updatesStudentList( // add student to dom() );
+
 }
+
+
 
 /**
  * cancelClicked - Event Handler when user clicks the cancel button, should clear out student form
  */
-function cancelClick() {
 
-    $('#studentGrade').reset();
+
+
+
+function cancelClick() {
+    // grabs form by ID and uses reset function to clear input
+    document.getElementById('student_form').reset();
 
 }
 
@@ -61,11 +69,24 @@ function addStudent() {
  * clearAddStudentForm - clears out the form values based on inputIds variable
  */
 
+
+}
 /**
  * calculateAverage - loop through the global student array and calculate average grade and return that value
  * @returns {number}
  */
-
+function calculateAverage() {
+    var total = 0;  //saving the total value of the loop
+    var i;  //variable for the loop
+    for(i=0; i<student_array.length; i++) {
+        //adding to the total with each loop
+        total += student_array[i].grade;
+    }
+    //calculating the average
+    var avg = total/student_array.length;
+    //appending to the html element
+    $('.avgGrade').append(avg);
+}
 /**
  * updateData - centralized function to update the average and call student list update
  */
@@ -75,6 +96,7 @@ function updataData() {
 /**
  * updateStudentList - loops through global student array and appends each objects data into the student-list-container > list-body
  */
+
 
 
 function updatesStudentList() {
@@ -90,7 +112,8 @@ function updatesStudentList() {
 
     addStudentToDom(student_name_value, student_course_value, student_grade_value);
 
-};
+}
+
 
 
 /**
