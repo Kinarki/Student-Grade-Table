@@ -58,18 +58,27 @@ function addStudent() {
     var student = {
         'name': document.getElementById('studentName').value,
         'course': document.getElementById('course').value,
-        'grade': $('#studentGrade').val()
+        'grade': $('#studentGrade').val(),
+        'delete': function(){
+            console.log("hi")
+        }
     };
     //student-array is adding each student object as an array
     student_array.push(student);
     //clears add form after data is added to table
+
     cancelClick();
+
 }
 
 /**
  * clearAddStudentForm - clears out the form values based on inputIds variable
  */
+
+
 //see cancelClick function
+
+
 /**
  * calculateAverage - loop through the global student array and calculate average grade and return that value
  * @returns {number}
@@ -131,8 +140,9 @@ function addStudentToDom(s_name, s_course, s_grade) {
     var td3 = $('<td>', {
         text: s_grade
     });
+    var btn = $('<button>').addClass('btn btn-danger btn-xs').html('Delete').button.click();
     var tr = $('<tr>');
-    $(tr).append(td1, td2, td3);
+    $(tr).append(td1, td2, td3, btn);
     $('.student-list tbody').append(tr);
 
 
