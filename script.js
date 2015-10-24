@@ -27,7 +27,8 @@ var student_grade = $('#studentGrade');
 
 function addClick() {
     addStudent();
-    updatesStudentList();
+    updateData();
+
 
 }
 
@@ -61,7 +62,8 @@ function addStudent() {
     };
     //student-array is adding each student object as an array
     student_array.push(student);
-    console.log(student);
+    //clears add form after data is added to table
+    cancelClick()
 
 }
 
@@ -69,8 +71,8 @@ function addStudent() {
  * clearAddStudentForm - clears out the form values based on inputIds variable
  */
 
+//see cancelClick function
 
-}
 /**
  * calculateAverage - loop through the global student array and calculate average grade and return that value
  * @returns {number}
@@ -80,18 +82,20 @@ function calculateAverage() {
     var i;  //variable for the loop
     for(i=0; i<student_array.length; i++) {
         //adding to the total with each loop
-        total += student_array[i].grade;
+        total += parseInt(student_array[i].grade);
     }
     //calculating the average
-    var avg = total/student_array.length;
+    var avg = Math.floor(total/student_array.length);
+    console.log(avg);
     //appending to the html element
-    $('.avgGrade').append(avg);
+    $('.avgGrade').text(avg);
 }
 /**
  * updateData - centralized function to update the average and call student list update
  */
-function updataData() {
-
+function updateData() {
+    calculateAverage();
+    updatesStudentList();
 }
 /**
  * updateStudentList - loops through global student array and appends each objects data into the student-list-container > list-body
@@ -132,8 +136,14 @@ function addStudentToDom(s_name, s_course, s_grade) {
     var td3 = $('<td>', {
         text: s_grade
     });
+    var td4 = $('<btn>', {
+        text: 'Delete',
+        class: 'btn btn-danger btn-xs',
+        attr: $(onclick)
+
+    });
     var tr = $('<tr>');
-    $(tr).append(td1, td2, td3);
+    $(tr).append(td1, td2, td3, td4);
     $('.student-list tbody').append(tr);
 
 
