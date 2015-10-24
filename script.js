@@ -27,8 +27,8 @@ var student_grade = $('#studentGrade');
 
 function addClick() {
     addStudent();
+    updatesStudentList();
     updateData();
-
 
 }
 
@@ -66,7 +66,8 @@ function addStudent() {
     //student-array is adding each student object as an array
     student_array.push(student);
     //clears add form after data is added to table
-    cancelClick()
+
+    cancelClick();
 
 }
 
@@ -74,7 +75,9 @@ function addStudent() {
  * clearAddStudentForm - clears out the form values based on inputIds variable
  */
 
+
 //see cancelClick function
+
 
 /**
  * calculateAverage - loop through the global student array and calculate average grade and return that value
@@ -84,12 +87,12 @@ function calculateAverage() {
     var total = 0;  //saving the total value of the loop
     var i;  //variable for the loop
     for(i=0; i<student_array.length; i++) {
+
         //adding to the total with each loop
         total += parseInt(student_array[i].grade);
     }
     //calculating the average
     var avg = Math.floor(total/student_array.length);
-    console.log(avg);
     //appending to the html element
     $('.avgGrade').text(avg);
 }
@@ -99,6 +102,7 @@ function calculateAverage() {
 function updateData() {
     calculateAverage();
     updatesStudentList();
+
 }
 /**
  * updateStudentList - loops through global student array and appends each objects data into the student-list-container > list-body
@@ -112,8 +116,6 @@ function updatesStudentList() {
         var student_name_value = student_array[i].name;
         var student_course_value = student_array[i].course;
         var student_grade_value = student_array[i].grade;
-        console.log(student_name_value, student_course_value, student_grade_value);
-        console.log(student_array);
     }
 
 
