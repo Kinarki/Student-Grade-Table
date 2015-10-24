@@ -18,7 +18,7 @@ var student_name = $('#studentName');
 var student_course = $('#course');
 var student_grade = $('#studentGrade');
 
-// */
+
 
 
 /**
@@ -69,7 +69,7 @@ function addStudent() {
 /**
  * clearAddStudentForm - clears out the form values based on inputIds variable
  */
-//see cancel function
+//see cancelClick function
 /**
  * calculateAverage - loop through the global student array and calculate average grade and return that value
  * @returns {number}
@@ -92,7 +92,7 @@ function calculateAverage() {
  */
 function updateData() {
     calculateAverage();
-    updatesStudentList()
+    updatesStudentList();
 }
 /**
  * updateStudentList - loops through global student array and appends each objects data into the student-list-container > list-body
