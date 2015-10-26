@@ -14,9 +14,9 @@ var student_array = [];
  * @type {string[]}
 <<<<<<< HEAD
  */
-var student_name = $('#studentName');
-var student_course = $('#course');
-var student_grade = $('#studentGrade');
+//var student_name = $('#studentName');
+//var student_course = $('#course');
+//var student_grade = $('#studentGrade');
 
 
 
@@ -27,8 +27,9 @@ var student_grade = $('#studentGrade');
 
 function addClick() {
     addStudent();
-    updatesStudentList();
+    //updatesStudentList();
     updateData();
+    $('#hide').hide();
 
 }
 
@@ -60,7 +61,7 @@ function addStudent() {
         'course': document.getElementById('course').value,
         'grade': $('#studentGrade').val(),
         'delete': function(){
-            console.log("hi")
+            student[i].delete();
         }
     };
     //student-array is adding each student object as an array
@@ -115,6 +116,8 @@ function updatesStudentList() {
         var student_name_value = student_array[i].name;
         var student_course_value = student_array[i].course;
         var student_grade_value = student_array[i].grade;
+        //var btn = student_array[i];
+
     }
 
 
@@ -140,7 +143,7 @@ function addStudentToDom(s_name, s_course, s_grade) {
     var td3 = $('<td>', {
         text: s_grade
     });
-    var btn = $('<button>').addClass('btn btn-danger btn-xs').html('Delete').button.click();
+    var btn = $('<button>').addClass('btn btn-danger btn-xs').html('Delete').attr('onclick', 'student.delete');
     var tr = $('<tr>');
     $(tr).append(td1, td2, td3, btn);
     $('.student-list tbody').append(tr);
