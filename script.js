@@ -58,10 +58,8 @@ function addStudent() {
     var student = {
         'name': document.getElementById('studentName').value,
         'course': document.getElementById('course').value,
-        'grade': $('#studentGrade').val(),
-        'delete': function(){
-            student[i].delete();
-        }
+        'grade': $('#studentGrade').val()
+
     };
     //student-array is adding each student object as an array
     student_array.push(student);
@@ -110,16 +108,19 @@ function updateData() {
 
 function updatesStudentList() {
 
-    for (i = 0; i < student_array.length; i++) {
+    for (var i = 0; i < student_array.length; i++){
+        var student = student_array[i];
         var student_name_value = student_array[i].name;
         var student_course_value = student_array[i].course;
         var student_grade_value = student_array[i].grade;
-        var btn = $('<button>').addClass('btn btn-danger btn-xs').html('Delete').attr('onclick', 'student.delete');
+
+        student_array[i].element = addStudentToDom(student, i);
+
 
     }
 
 
-    addStudentToDom(student_name_value, student_course_value, student_grade_value, btn);
+    //addStudentToDom(student_name_value, student_course_value, student_grade_value, btn);
 
 }
 
@@ -131,7 +132,7 @@ function updatesStudentList() {
  * @param studentObj
  */
 
-function addStudentToDom(s_name, s_course, s_grade, button) {
+function addStudentToDom(student, student_index) {
     var td1 = $('<td>', {
         text: s_name
     });
@@ -141,11 +142,17 @@ function addStudentToDom(s_name, s_course, s_grade, button) {
     var td3 = $('<td>', {
         text: s_grade
     });
+    var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button').attr('student_index',i).click(function(){
 
+    });
     var td4 = $('<td>').append(button);
     var tr = $('<tr>');
     $(tr).append(td1, td2, td3, td4);
     $('.student-list tbody').append(tr);
+
+    $(btn).click(function(){
+        console.log(student_index,student, this);
+    });
 
 
 }
@@ -154,8 +161,15 @@ function addStudentToDom(s_name, s_course, s_grade, button) {
 /**
  * reset - resets the application to initial state. Global variables reset, DOM get reset to initial load state
  */
-
+function reset() {
+    student_array = [];
+    cancelClick();
+    $('#hide').show();
+}
 
 /**
  * Listen for the document to load and reset the data to the initial state
  */
+$(document).ready(function(){
+    reset();
+});
