@@ -58,7 +58,11 @@ function addStudent() {
     var student = {
         'name': document.getElementById('studentName').value,
         'course': document.getElementById('course').value,
-        'grade': $('#studentGrade').val()
+        'grade': $('#studentGrade').val(),
+        'delete': function(){
+            console.log(i ,"made right away");
+            //student_array[i].delete();
+        }
 
     };
     //student-array is adding each student object as an array
@@ -67,11 +71,13 @@ function addStudent() {
     updatesStudentList();
     cancelClick();
 
+
 }
 
 /**
  * clearAddStudentForm - clears out the form values based on inputIds variable
  */
+
 
 
 //see cancelClick function
@@ -108,7 +114,8 @@ function updateData() {
 
 function updatesStudentList() {
 
-    for (var i = 0; i < student_array.length; i++){
+    $('.student-list tbody').html('');
+    for (var i = 0; i < student_array.length; i++) {
         var student = student_array[i];
         var student_name_value = student_array[i].name;
         var student_course_value = student_array[i].course;
@@ -116,14 +123,7 @@ function updatesStudentList() {
 
         student_array[i].element = addStudentToDom(student, i);
 
-
-    }
-
-
     //addStudentToDom(student_name_value, student_course_value, student_grade_value, btn);
-
-}
-
 
 
 /**
@@ -132,27 +132,34 @@ function updatesStudentList() {
  * @param studentObj
  */
 
+
 function addStudentToDom(student, student_index) {
+
+
     var td1 = $('<td>', {
-        text: s_name
+        text: student.name
     });
     var td2 = $('<td>', {
-        text: s_course
+        text: student.course
     });
     var td3 = $('<td>', {
-        text: s_grade
+        text: student.grade
     });
-    var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button').attr('student_index',i).click(function(){
 
-    });
-    var td4 = $('<td>').append(button);
+    var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button')//.attr('student_index',student);
+
+    var td4 = $('<td>').append(btn);
+
     var tr = $('<tr>');
     $(tr).append(td1, td2, td3, td4);
     $('.student-list tbody').append(tr);
 
     $(btn).click(function(){
-        console.log(student_index,student, this);
+
+        //$(student).remove();
+        console.log(student_index, student, this);
     });
+    return tr;
 
 
 }
