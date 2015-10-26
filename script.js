@@ -122,53 +122,49 @@ function updatesStudentList() {
         var student_grade_value = student_array[i].grade;
 
         student_array[i].element = addStudentToDom(student, i);
-
-    //addStudentToDom(student_name_value, student_course_value, student_grade_value, btn);
-
-
-/**
- * addStudentToDom - take in a student object, create html elements from the values and then append the elements
- * into the .student_list tbody
- * @param studentObj
- */
-
-
-function addStudentToDom(student, student_index) {
-
-
-    var td1 = $('<td>', {
-        text: student.name
-    });
-    var td2 = $('<td>', {
-        text: student.course
-    });
-    var td3 = $('<td>', {
-        text: student.grade
-    });
-
-    var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button')//.attr('student_index',student);
-
-    var td4 = $('<td>').append(btn);
-
-    var tr = $('<tr>');
-    $(tr).append(td1, td2, td3, td4);
-    $('.student-list tbody').append(tr);
-
-    $(btn).click(function(){
-
-        //$(student).remove();
-        console.log(student_index, student, this);
-    });
-    return tr;
-
+    }
 
 }
+    /**
+     * addStudentToDom - take in a student object, create html elements from the values and then append the elements
+     * into the .student_list tbody
+     * @param studentObj
+     */
+
+
+    function addStudentToDom(student, student_index) {
+
+
+        var td1 = $('<td>', {
+            text: student.name
+        });
+        var td2 = $('<td>', {
+            text: student.course
+        });
+        var td3 = $('<td>', {
+            text: student.grade
+        });
+
+        var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button'); //.attr('student_index',student);
+
+        var td4 = $('<td>').append(btn);
+
+        var tr = $('<tr>');
+        $(tr).append(td1, td2, td3, td4);
+        $('.student-list tbody').append(tr);
+
+        $(btn).click(function () {
+            tr.remove();
+            student_array.splice((student_index), 1);
+        });
+        return tr;
+    }
 
 
 /**
  * reset - resets the application to initial state. Global variables reset, DOM get reset to initial load state
  */
-function reset() {
+function reset(){
     student_array = [];
     cancelClick();
     $('#hide').show();
