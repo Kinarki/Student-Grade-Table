@@ -27,7 +27,6 @@ var student_array = [];
 
 function addClick() {
     addStudent();
-    //updatesStudentList();
     updateData();
     $('#hide').hide();
 
@@ -67,7 +66,7 @@ function addStudent() {
     //student-array is adding each student object as an array
     student_array.push(student);
     //clears add form after data is added to table
-
+    updatesStudentList();
     cancelClick();
 
 }
@@ -102,7 +101,6 @@ function calculateAverage() {
  */
 function updateData() {
     calculateAverage();
-    updatesStudentList();
 }
 /**
  * updateStudentList - loops through global student array and appends each objects data into the student-list-container > list-body
@@ -116,12 +114,12 @@ function updatesStudentList() {
         var student_name_value = student_array[i].name;
         var student_course_value = student_array[i].course;
         var student_grade_value = student_array[i].grade;
-        //var btn = student_array[i];
+        var btn = $('<button>').addClass('btn btn-danger btn-xs').html('Delete').attr('onclick', 'student.delete');
 
     }
 
 
-    addStudentToDom(student_name_value, student_course_value, student_grade_value);
+    addStudentToDom(student_name_value, student_course_value, student_grade_value, btn);
 
 }
 
@@ -133,7 +131,7 @@ function updatesStudentList() {
  * @param studentObj
  */
 
-function addStudentToDom(s_name, s_course, s_grade) {
+function addStudentToDom(s_name, s_course, s_grade, button) {
     var td1 = $('<td>', {
         text: s_name
     });
@@ -143,9 +141,10 @@ function addStudentToDom(s_name, s_course, s_grade) {
     var td3 = $('<td>', {
         text: s_grade
     });
-    var btn = $('<button>').addClass('btn btn-danger btn-xs').html('Delete').attr('onclick', 'student.delete');
+
+    var td4 = $('<td>').append(button);
     var tr = $('<tr>');
-    $(tr).append(td1, td2, td3, btn);
+    $(tr).append(td1, td2, td3, td4);
     $('.student-list tbody').append(tr);
 
 
