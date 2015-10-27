@@ -14,12 +14,6 @@ var student_array = [];
  * @type {string[]}
 <<<<<<< HEAD
  */
-//var student_name = $('#studentName');
-//var student_course = $('#course');
-//var student_grade = $('#studentGrade');
-
-
-
 
 /**
  * addClicked - Event Handler when user clicks the add button
@@ -42,7 +36,7 @@ function addClick() {
 
 
 function cancelClick() {
-    // grabs form by ID and uses reset function to clear input
+    // grabs form by ID and uses reset method to clear input
     document.getElementById('student_form').reset();
 
 }
@@ -59,16 +53,13 @@ function addStudent() {
         'name': document.getElementById('studentName').value,
         'course': document.getElementById('course').value,
         'grade': $('#studentGrade').val(),
-        'delete': function(){
-            console.log(i ,"made right away");
-            //student_array[i].delete();
-        }
-
+        'delete': false
     };
     //student-array is adding each student object as an array
     student_array.push(student);
-    //clears add form after data is added to table
+
     updatesStudentList();
+    //clears add form after data is added to table
     cancelClick();
 
 
@@ -89,15 +80,14 @@ function addStudent() {
  */
 function calculateAverage() {
     var total = 0;  //saving the total value of the loop
-    var i;  //variable for the loop
-    for(i=0; i<student_array.length; i++) {
+    for(var i=0; i<student_array.length; i++) {
 
         //adding to the total with each loop
         total += parseInt(student_array[i].grade);
     }
     //calculating the average
     var avg = Math.floor(total/student_array.length);
-    //appending to the html element
+    //adding text to the html element
     $('.avgGrade').text(avg);
 }
 /**
@@ -132,33 +122,35 @@ function updatesStudentList() {
      */
 
 
-    function addStudentToDom(student, student_index) {
+function addStudentToDom(student, student_index) {
 
 
-        var td1 = $('<td>', {
-            text: student.name
-        });
-        var td2 = $('<td>', {
-            text: student.course
-        });
-        var td3 = $('<td>', {
-            text: student.grade
-        });
+    var td1 = $('<td>', {
+        text: student.name
+    });
+    var td2 = $('<td>', {
+        text: student.course
+    });
+    var td3 = $('<td>', {
+        text: student.grade
+    });
 
-        var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button'); //.attr('student_index',student);
+    var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button');
 
-        var td4 = $('<td>').append(btn);
+    var td4 = $('<td>').append(btn);
 
-        var tr = $('<tr>');
-        $(tr).append(td1, td2, td3, td4);
-        $('.student-list tbody').append(tr);
+    var tr = $('<tr>');
+    $(tr).append(td1, td2, td3, td4);
+    $('.student-list tbody').append(tr);
 
-        $(btn).click(function () {
-            tr.remove();
-            student_array.splice((student_index), 1);
-        });
-        return tr;
-    }
+    $(btn).click(function () {
+        $(tr).remove();
+        student_array.splice(student_index, 1);
+        calculateAverage();
+        console.log(student_array);
+    });
+    return tr;
+}
 
 
 /**
