@@ -54,6 +54,9 @@ function addStudent() {
         'course': document.getElementById('course').value,
         'grade': $('#studentGrade').val(),
         'delete': false
+
+        }
+
     };
     //student-array is adding each student object as an array
     student_array.push(student);
@@ -103,6 +106,7 @@ function updateData() {
 
 
 function updatesStudentList() {
+
     $('.student-list tbody').html('');
     for (var i = 0; i < student_array.length; i++) {
         var student = student_array[i];
@@ -119,8 +123,13 @@ function updatesStudentList() {
 
     }
 
-
 }
+    /**
+     * addStudentToDom - take in a student object, create html elements from the values and then append the elements
+     * into the .student_list tbody
+     * @param studentObj
+     */
+
 
 
 /**
@@ -143,12 +152,11 @@ function addStudentToDom(student) {
     });
     var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button');
 
-    var td4 = $('<td>').append(btn);
+        var td4 = $('<td>').append(btn);
 
-    var tr = $('<tr>');
-    $(tr).append(td1, td2, td3, td4);
-    $('.student-list tbody').append(tr);
-    console.log(student);
+        var tr = $('<tr>');
+        $(tr).append(td1, td2, td3, td4);
+        $('.student-list tbody').append(tr);
 
     $(btn).click(function () {
         $(tr).remove();
@@ -161,11 +169,19 @@ function addStudentToDom(student) {
 }
 
 
+
 /**
  * reset - resets the application to initial state. Global variables reset, DOM get reset to initial load state
  */
-
+function reset(){
+    student_array = [];
+    cancelClick();
+    $('#hide').show();
+}
 
 /**
  * Listen for the document to load and reset the data to the initial state
  */
+$(document).ready(function(){
+    reset();
+});
