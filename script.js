@@ -8,7 +8,6 @@
 
 var student_array = [];
 
-
 /**
  * inputIds - id's of the elements that are used to add students
  * @type {string[]}
@@ -70,16 +69,20 @@ function addStudent() {
 
 function calculateAverage() {
     var total = 0;  //saving the total value of the loop
+    var count= 0;
 
     for(var i=0; i<student_array.length; i++) {
-        //adding to the total with each loop
-        total += parseInt(student_array[i].grade);
+        if(!student_array[i].delete){
+            //adding to the total with each loop
+            total += parseInt(student_array[i].grade);
+            count ++;
+        }
     }
     //calculating the average
-    var avg = Math.floor(total / student_array.length);
+    var avg = Math.floor(total / count);
     //appending to the html element
-
     $('.avgGrade').text(avg);
+
 }
 
 /**
@@ -109,8 +112,6 @@ function updatesStudentList() {
 
             addStudentToDom(student);
         }
-
-
     }
 
 }
@@ -141,11 +142,8 @@ function addStudentToDom(student) {
 
     $(btn).click(function () {
         $(tr).remove();
-
         student.delete = true;
         calculateAverage();
-        console.log(student_array);
-
     });
 
 }
