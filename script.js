@@ -12,7 +12,7 @@ var student_array = [];
 /**
  * inputIds - id's of the elements that are used to add students
  * @type {string[]}
-<<<<<<< HEAD
+ <<<<<<< HEAD
  */
 
 /**
@@ -26,19 +26,13 @@ function addClick() {
 
 }
 
-
-
 /**
  * cancelClicked - Event Handler when user clicks the cancel button, should clear out student form
  */
 
-
-
-
 function cancelClick() {
     // grabs form by ID and uses reset method to clear input
     document.getElementById('student_form').reset();
-
 }
 
 /**
@@ -61,38 +55,37 @@ function addStudent() {
     updatesStudentList();
     //clears add form after data is added to table
     cancelClick();
-
-
 }
 
 /**
  * clearAddStudentForm - clears out the form values based on inputIds variable
  */
 
-
-
 //see cancelClick function
-
 
 /**
  * calculateAverage - loop through the global student array and calculate average grade and return that value
  * @returns {number}
  */
+
 function calculateAverage() {
     var total = 0;  //saving the total value of the loop
-    for(var i=0; i<student_array.length; i++) {
 
+    for(var i=0; i<student_array.length; i++) {
         //adding to the total with each loop
         total += parseInt(student_array[i].grade);
     }
     //calculating the average
-    var avg = Math.floor(total/student_array.length);
-    //adding text to the html element
+    var avg = Math.floor(total / student_array.length);
+    //appending to the html element
+
     $('.avgGrade').text(avg);
 }
+
 /**
  * updateData - centralized function to update the average and call student list update
  */
+
 function updateData() {
     calculateAverage();
 }
@@ -110,20 +103,24 @@ function updatesStudentList() {
         var student_name_value = student_array[i].name;
         var student_course_value = student_array[i].course;
         var student_grade_value = student_array[i].grade;
+        var student_delete_value = student_array[i].delete;
 
-        student_array[i].element = addStudentToDom(student, i);
+        if(student_delete_value == false) {
+
+            addStudentToDom(student);
+        }
+
+
     }
 
 }
-    /**
-     * addStudentToDom - take in a student object, create html elements from the values and then append the elements
-     * into the .student_list tbody
-     * @param studentObj
-     */
+/**
+ * addStudentToDom - take in a student object, create html elements from the values and then append the elements
+ * into the .student_list tbody
+ * @param studentObj
+ */
 
-
-function addStudentToDom(student, student_index) {
-
+function addStudentToDom(student) {
 
     var td1 = $('<td>', {
         text: student.name
@@ -134,7 +131,6 @@ function addStudentToDom(student, student_index) {
     var td3 = $('<td>', {
         text: student.grade
     });
-
     var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button');
 
     var td4 = $('<td>').append(btn);
@@ -145,14 +141,14 @@ function addStudentToDom(student, student_index) {
 
     $(btn).click(function () {
         $(tr).remove();
-        student_array.splice(student_index, 1);
+
+        student.delete = true;
         calculateAverage();
         console.log(student_array);
+
     });
-    return tr;
+
 }
-
-
 /**
  * reset - resets the application to initial state. Global variables reset, DOM get reset to initial load state
  */
