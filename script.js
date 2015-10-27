@@ -22,8 +22,6 @@ var avg = 0;
 function addClick() {
     addStudent();
     updateData();
-    $('#hide').hide();
-
 }
 
 /**
@@ -158,7 +156,12 @@ function addStudentToDom(student) {
 function reset(){
     student_array = [];
     cancelClick();
-    $('#hide').show();
+
+    //'user info unavailable' DOM creation
+    var h3 = $('<h3>').text('User Info Unavailable');
+    var td = $('<td>').attr('colSpan', '2').append(h3);
+    var tr1 = $('<tr>').append(td);
+    $('.student-list tbody').append(tr1);
 }
 
 /**
