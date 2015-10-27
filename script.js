@@ -12,13 +12,8 @@ var student_array = [];
 /**
  * inputIds - id's of the elements that are used to add students
  * @type {string[]}
-<<<<<<< HEAD
+ <<<<<<< HEAD
  */
-//var student_name = $('#studentName');
-//var student_course = $('#course');
-//var student_grade = $('#studentGrade');
-
-
 
 
 /**
@@ -31,7 +26,6 @@ function addClick() {
     $('#hide').hide();
 
 }
-
 
 
 /**
@@ -59,9 +53,8 @@ function addStudent() {
         'name': document.getElementById('studentName').value,
         'course': document.getElementById('course').value,
         'grade': $('#studentGrade').val(),
-        'delete': function(){
-            console.log(i ,"made right away");
-            //student_array[i].delete();
+        'delete': false
+
         }
 
     };
@@ -90,13 +83,13 @@ function addStudent() {
 function calculateAverage() {
     var total = 0;  //saving the total value of the loop
     var i;  //variable for the loop
-    for(i=0; i<student_array.length; i++) {
+    for (i = 0; i < student_array.length; i++) {
 
         //adding to the total with each loop
         total += parseInt(student_array[i].grade);
     }
     //calculating the average
-    var avg = Math.floor(total/student_array.length);
+    var avg = Math.floor(total / student_array.length);
     //appending to the html element
     $('.avgGrade').text(avg);
 }
@@ -120,8 +113,14 @@ function updatesStudentList() {
         var student_name_value = student_array[i].name;
         var student_course_value = student_array[i].course;
         var student_grade_value = student_array[i].grade;
+        var student_delete_value = student_array[i].delete;
 
-        student_array[i].element = addStudentToDom(student, i);
+        if(student_delete_value == false) {
+
+            addStudentToDom(student);
+        }
+
+
     }
 
 }
@@ -132,20 +131,26 @@ function updatesStudentList() {
      */
 
 
-    function addStudentToDom(student, student_index) {
+
+/**
+ * addStudentToDom - take in a student object, create html elements from the values and then append the elements
+ * into the .student_list tbody
+ * @param studentObj
+ */
 
 
-        var td1 = $('<td>', {
-            text: student.name
-        });
-        var td2 = $('<td>', {
-            text: student.course
-        });
-        var td3 = $('<td>', {
-            text: student.grade
-        });
+function addStudentToDom(student) {
 
-        var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button'); //.attr('student_index',student);
+    var td1 = $('<td>', {
+        text: student.name
+    });
+    var td2 = $('<td>', {
+        text: student.course
+    });
+    var td3 = $('<td>', {
+        text: student.grade
+    });
+    var btn = $('<button>').addClass('btn btn-danger btn-xs').text('Delete').attr('type', 'button');
 
         var td4 = $('<td>').append(btn);
 
@@ -153,12 +158,16 @@ function updatesStudentList() {
         $(tr).append(td1, td2, td3, td4);
         $('.student-list tbody').append(tr);
 
-        $(btn).click(function () {
-            tr.remove();
-            student_array.splice((student_index), 1);
-        });
-        return tr;
-    }
+    $(btn).click(function () {
+        $(tr).remove();
+        student.delete = true;
+        calculateAverage();
+        console.log(student_array);
+
+    });
+
+}
+
 
 
 /**
