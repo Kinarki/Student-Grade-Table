@@ -7,6 +7,7 @@
  */
 
 var student_array = [];
+var avg = 0;
 
 /**
  * inputIds - id's of the elements that are used to add students
@@ -79,9 +80,13 @@ function calculateAverage() {
         }
     }
     //calculating the average
-    var avg = Math.floor(total / count);
+    avg = Math.floor(total / count);
+    if(isNaN(avg)){
+        $('.avgGrade').text(0);
+    } else {
     //appending to the html element
     $('.avgGrade').text(avg);
+    }
 
 }
 
