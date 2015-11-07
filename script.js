@@ -8,6 +8,7 @@
 
 var student_array = [];
 var avg = 0;
+var student_data;
 
 /**
  * inputIds - id's of the elements that are used to add students
@@ -181,6 +182,13 @@ $(document).ready(function(){
             url: 'http://s-apis.learningfuze.com/sgt/get',
             success: function(result){
                 console.log('AJAX Success function called, with the following result:', result);
+                for (var i = 0; i < result.data.length; i++) {
+                    student_data = result.data[i];
+
+
+                console.log(student_data);
+
+                addStudentToDom(student_data);}
             }
 
         });
