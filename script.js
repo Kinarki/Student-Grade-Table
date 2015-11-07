@@ -167,6 +167,23 @@ function reset(){
 /**
  * Listen for the document to load and reset the data to the initial state
  */
+
+//document ready and ajax call
 $(document).ready(function(){
     reset();
+    $('.populate').click(function(){
+        $.ajax({
+            dataType: 'json',
+            data: {
+                api_key: 'WCTLtARP67'
+            },
+            method: 'POST',
+            url: 'http://s-apis.learningfuze.com/sgt/get',
+            success: function(result){
+                console.log('AJAX Success function called, with the following result:', result);
+            }
+
+        });
+    });
 });
+
