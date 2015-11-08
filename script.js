@@ -51,7 +51,7 @@ function addStudent() {
     //student-array is adding each student object as an array
     student_array.push(student);
 
-    updatesStudentList();
+    updatesStudentList(student);
     //clears add form after data is added to table
     cancelClick();
 }
@@ -102,7 +102,7 @@ function updateData() {
 
 
 
-function updatesStudentList() {
+function updatesStudentList(student) {
 
     $('.student-list tbody').html('');
     for (var i = 0; i < student_array.length; i++) {
@@ -112,10 +112,8 @@ function updatesStudentList() {
         var student_grade_value = student_array[i].grade;
         var student_delete_value = student_array[i].delete;
 
-        if(student_delete_value == false) {
+        addStudentToDom(student);
 
-            addStudentToDom(student);
-        }
     }
 
 }
@@ -146,7 +144,7 @@ function addStudentToDom(student) {
 
     $(btn).click(function () {
         $(tr).remove();
-        student.delete = true;
+        student_array.splice(this,1);
         calculateAverage();
     });
 
@@ -185,12 +183,12 @@ $(document).ready(function(){
                 for (var i = 0; i < result.data.length; i++) {
                     student_data = result.data[i];
 
+                    student_array.push(student_data);
 
-                console.log(student_data);
-
-                addStudentToDom(student_data);}
+                    calculateAverage();
+                    updatesStudentList(student_data);
+                }
             }
-
         });
     });
 });
