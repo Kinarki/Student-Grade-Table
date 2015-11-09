@@ -8,6 +8,7 @@
 
 var student_array = [];
 var avg = 0;
+var student_data;
 
 /**
  * inputIds - id's of the elements that are used to add students
@@ -50,7 +51,7 @@ function addStudent() {
     //student-array is adding each student object as an array
     student_array.push(student);
 
-    updatesStudentList();
+    updatesStudentList(student);
     //clears add form after data is added to table
     cancelClick();
 }
@@ -101,7 +102,7 @@ function updateData() {
 
 
 
-function updatesStudentList() {
+function updatesStudentList(student) {
 
     $('.student-list tbody').html('');
     for (var i = 0; i < student_array.length; i++) {
@@ -111,10 +112,8 @@ function updatesStudentList() {
         var student_grade_value = student_array[i].grade;
         var student_delete_value = student_array[i].delete;
 
-        if(student_delete_value == false) {
+        addStudentToDom(student);
 
-            addStudentToDom(student);
-        }
     }
 
 }
@@ -145,7 +144,7 @@ function addStudentToDom(student) {
 
     $(btn).click(function () {
         $(tr).remove();
-        student.delete = true;
+        student_array.splice(this,1);
         calculateAverage();
     });
 
@@ -167,6 +166,30 @@ function reset(){
 /**
  * Listen for the document to load and reset the data to the initial state
  */
+
+//document ready and ajax call
 $(document).ready(function(){
     reset();
+    $('.populate').click(function(){
+        $.ajax({
+            dataType: 'json',
+            data: {
+                api_key: 'WCTLtARP67'
+            },
+            method: 'POST',
+            url: 'http://s-apis.learningfuze.com/sgt/get',
+            success: function(result){
+                console.log('AJAX Success function called, with the following result:', result);
+                for (var i = 0; i < result.data.length; i++) {
+                    student_data = result.data[i];
+
+                    student_array.push(student_data);
+
+                    calculateAverage();
+                    updatesStudentList(student_data);
+                }
+            }
+        });
+    });
 });
+
