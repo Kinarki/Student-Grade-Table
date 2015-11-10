@@ -8,7 +8,8 @@
 
 var student_array = [];
 var avg = 0;
-var student_data;
+//var student_data;
+var api_key = 'WCTLtARP67';
 
 /**
  * inputIds - id's of the elements that are used to add students
@@ -46,11 +47,13 @@ function addStudent() {
         'name': document.getElementById('studentName').value,
         'course': document.getElementById('course').value,
         'grade': $('#studentGrade').val(),
-        'delete': false
+        'delete': false,
+        'id': ''
+
     };
     //student-array is adding each student object as an array
     student_array.push(student);
-
+    addStudentToDatabase(student);
     updatesStudentList(student);
     //clears add form after data is added to table
     cancelClick();
@@ -145,6 +148,7 @@ function addStudentToDom(student) {
     $(btn).click(function () {
         $(tr).remove();
         student_array.splice(this,1);
+        databaseStudentDelete(student);
         calculateAverage();
     });
 
@@ -166,6 +170,38 @@ function reset(){
 /**
  * Listen for the document to load and reset the data to the initial state
  */
+function addStudentToDatabase(student){
+    $.ajax({
+        dataType: 'json',
+        data: {
+            api_key: api_key,
+            name: student.name,
+            grade: student.grade,
+            course: student.course
+        },
+        method: "POST",
+        url: 'http://s-apis.learningfuze.com/sgt/create',
+        success: function(response) {
+            console.log('AJAX Success function called, with the following result:', response);
+            student.id = response.new_id;
+        }
+    });
+}
+
+function databaseStudentDelete(student) {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            api_key: api_key,
+            student_id: student.id
+        },
+        method: "POST",
+        url: 'http://s-apis.learningfuze.com/sgt/delete',
+        success: function (deleted) {
+            console.log('AJAX Delete function called, the following was deleted:', deleted);
+        }
+    });
+}
 
 //document ready and ajax call
 $(document).ready(function(){
@@ -174,7 +210,7 @@ $(document).ready(function(){
         $.ajax({
             dataType: 'json',
             data: {
-                api_key: 'WCTLtARP67'
+                api_key: api_key
             },
             method: 'POST',
             url: 'http://s-apis.learningfuze.com/sgt/get',
@@ -191,5 +227,7 @@ $(document).ready(function(){
             }
         });
     });
+
+
 });
 
