@@ -8,7 +8,7 @@
 
 var student_array = [];
 var avg = 0;
-//var student_data;
+var student_data;
 var api_key = 'WCTLtARP67';
 
 /**
