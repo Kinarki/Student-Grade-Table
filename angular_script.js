@@ -26,29 +26,29 @@ app.controller('appCtrl', function($scope){
 
     };
 
-    //self.addStudents = function (student) {
-    //    self.studentArray.push(student);
-    //};
+    self.addStudents = function (student) {
+        self.studentArray.push(student);
+    };
 
-    //self.populate = function(){
-    //    var student_data;
-    //    $.ajax({
-    //        dataType: 'json',
-    //        data: {
-    //            api_key: 'WCTLtARP67'
-    //        },
-    //        method: 'POST',
-    //        url: 'http://s-apis.learningfuze.com/sgt/get',
-    //        success: function(result){
-    //            console.log('AJAX Success function called, with the following result:', result);
-    //            for (var i = 0; i < result.data.length; i++) {
-    //                student_data = result.data[i];
-    //                    self.addStudents(student_data);
-    //            }
-    //        $scope.$digest();
-    //        }
-    //    });
-    //};
+    self.populate = function(){
+        var student_data;
+        $.ajax({
+            dataType: 'json',
+            data: {
+                api_key: 'WCTLtARP67'
+            },
+            method: 'POST',
+            url: 'http://s-apis.learningfuze.com/sgt/get',
+            success: function(result){
+                console.log('AJAX Success function called, with the following result:', result);
+                for (var i = 0; i < result.data.length; i++) {
+                    student_data = result.data[i];
+                        self.addStudents(student_data);
+                }
+            $scope.$digest();
+            }
+        });
+    };
 }).controller('formCtrl', function($scope){
     /*
      -Handle Inputs and validating inputs using angular filters
